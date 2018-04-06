@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+	
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	{% block script %}
+
+	{% endblock %}        
+
+
+	
+
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>{% block title %} {{ title | striptags }} {% endblock %}</title>
+	<meta name="generator" content="frappe">
+    {% block favicon %}
+	<link rel="shortcut icon"
+		href="/assets/frappe/images/favicon.ico
+		type="image/x-icon">
+	<link rel="icon"
+		href="/assets/frappe/images/favicon.ico"
+		type="image/x-icon">
+    {% endblock %}
+
+	{%- block head -%}
+		{% block meta_block %}{% endblock %}
+		{% if head_html is defined -%}
+		{{ head_html or "" }}
+		{%- endif %}
+		{%- for link in custom_web_include_css %}
+		<link type="text/css" rel="stylesheet" href="{{ link|abs_url }}">
+		{%- endfor -%}
+
+	    {%- block head_include %}{{ head_include or "" }}{% endblock -%}
+
+		{%- block style %}
+		{%- endblock -%}
+	{%- endblock -%}
+    <script>
+		window.frappe = {};
+		frappe.ready_events = [];
+		frappe.ready = function(fn) {
+			frappe.ready_events.push(fn);
+		}
+		window.dev_server = {{ dev_server }};
+    </script>
+    <link type="text/css" rel="stylesheet" href="/assets/css/custom-frappe-web.css">
+
+	<link href="https://fonts.googleapis.com/css?family=Hind:300,400,500,600,700|Poppins:100,200,300,400,500,600,700" rel="stylesheet">
+	<link
+		href="assets/frappe/assets/plugins/fancybox/jquery.fancybox.css">
+	<link
+		href="assets/frappe/assets/plugins/fancybox/jquery.fancybox.min.css">
+	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.min.css">
+
+</head>
+{% block body %}
+<body data-path="{{ path }}">
+	<div class="main-section">
+		{% include "templates/includes/navbar/SearchHeader.html" %}
+		<div>
+			<div class="l-theme animated-css" data-header="sticky" data-header-top="200" data-canvas="container">
+				{%- block navbar -%}
+	            	
+	            	{% include "templates/includes/navbar/MainHeader.html" %}
+	            
+	            {%- endblock -%}
+				
+
+	            {% block content %}
+
+	            {% endblock %}
+			</div>
+		</div>
+		<div>
+			{%- block footer -%}
+				
+				{% include "templates/includes/footer/webfooter.html" %}
+			
+			{%- endblock -%}
+		</div>
+	</div>
+	{% block base_scripts %}
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script type="text/javascript" src="/assets/frappe/js/lib/jquery/jquery.min.js"></script>
+	<script type="text/javascript" src="/assets/js/frappe-web.min.js"></script>	
+	<script src="https://use.fontawesome.com/ffcc57d59e.js"></script>
+	<script type="text/javascript"
+		src="/assets/frappe/assets/libs/jquery-migrate-1.2.1.js"></script>
+	<script type="text/javascript"
+		src="/assets/frappe/assets/libs/bootstrap/bootstrap.min.js"></script>
+	<script type="text/javascript"
+		src="/assets/frappe/assets/js/custom.js"></script>
+	<script type="text/javascript"
+		src="/assets/frappe/assets/plugins/headers/slidebar.js"></script>
+	<script type="text/javascript"
+		src="/assets/frappe/assets/plugins/headers/header.js"></script>
+	<script type="text/javascript"
+		src="/assets/frappe/assets/plugins/bootstrap-select/js/bootstrap-select.min.js"></script>
+	<script type="text/javascript"
+		src="/assets/frappe/assets/plugins/owl-carousel/owl.carousel.min.js"></script>
+	<script type="text/javascript"
+		src="/assets/frappe/assets/plugins/magnific-popup/jquery.magnific-popup.min.js"></script>
+	<script type="text/javascript"
+		src="/assets/frappe/assets/plugins/jqBootstrapValidation.js"></script>
+	<script type="text/javascript"
+		src="/assets/frappe/assets/plugins/contact_me.js"></script>
+	<script type="text/javascript"
+		src="/assets/frappe/assets/plugins/rendro-easy-pie-chart/jquery.easypiechart.min.js"></script>
+	<script type="text/javascript"
+		src="/assets/frappe/assets/plugins/rendro-easy-pie-chart/waypoints.min.js"></script>
+	<script type="text/javascript"
+		src="/assets/frappe/assets/plugins/noUiSlider/nouislider.min.js"></script>
+	<script type="text/javascript"
+		src="/assets/frappe/assets/plugins/noUiSlider/wNumb.js"></script>
+	<script type="text/javascript"
+		src="/assets/frappe/assets/plugins/scrollreveal/scrollreveal.min.js"></script>
+	<script type="text/javascript"
+		src="/assets/frappe/assets/plugins/slider-pro/jquery.sliderPro.min.js"></script> 
+	<script src="/assets/frappe/assets/plugins/fancybox/jquery.fancybox.min.js"></script>
+    <script src="/assets/frappe/assets/plugins/fancybox/jquery.fancybox.js"></script>	
+	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+	<script type="text/javascript"> 
+	$(document).ready(function(){ 
+		$(".bootstrap-select").click(function(){
+		 $(this).toggleClass("open"); 
+		}); 
+	}) 
+	</script>
+
+
+
+	{% endblock %}
+    {%- if js_globals is defined %}
+    <script>
+    {%- for key, value in js_globals.iteritems() %}
+    window.{{ key }} = "{{ value[0] }}";
+    {%- endfor -%}
+    </script>
+    {% endif -%}
+	{%- for link in web_include_js %}
+	<script type="text/javascript" src="{{ link|abs_url }}"></script>
+	{%- endfor -%}
+
+	<!-- csrf_token -->
+    {%- block body_include %}{{ body_include or "" }}{% endblock -%}
+
+
+<script type="text/javascript">
+$("#citysearch").click(function(){
+$("#city").addClass("open");
+
+});
+
+$("#city_options").change(function() {
+var city = $("#city_options option:selected").val();
+document.cookie = "city_location="+city;
+location.reload();
+
+})
+
+$("#cityclose").click(function(){
+$("#city").removeClass("open");
+});
+
+
+</script>
+
+
+</body>
+
+{% endblock %}
+</html>
+

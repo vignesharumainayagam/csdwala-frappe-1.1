@@ -1,0 +1,138 @@
+ 
+
+
+
+            <div class="header-search open-search">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm-8 col-sm-offset-2 col-xs-10 col-xs-offset-1">
+                            <div class="navbar-search">
+                                <form class="search-global">
+                                    <input class="search-global__input" type="text" placeholder="Type to search" autocomplete="off" name="s" value="" />
+                                    <button class="search-global__btn"><i class="icon stroke icon-Search"></i>
+                                    </button>
+                                    <div class="search-global__note">Begin typing your search above and press return to search.</div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <button class="search-close close" type="button"><i class="fa fa-times"></i>
+                </button>
+            </div>
+
+<!-- html div for city search -->
+            <div class="header-search1 open-search" id="city">
+              
+            <select class="selectpicker city-s" data-width="100%" id="city_options" tabindex="-98">
+                 <option  disabled selected value>Select City</option>
+                 {%- for l in city %}
+                    <option value="{{l.name}}">{{l.city_name}}</option>
+                 {%- endfor -%}
+            </select>
+
+
+
+                
+                <button class="search-close close" id="cityclose" type="button"><i class="fa fa-times"></i>
+                </button>
+            </div>
+
+
+
+
+
+<!-- html div for city search -->
+
+
+        
+            <header class="header header-boxed-width navbar-fixed-top header-color-black header-topbar-dark header-logo-black header-topbarbox-1-left header-topbarbox-2-right header-navibox-1-left header-navibox-2-right header-navibox-3-right header-navibox-4-right">
+                <div class="container container-boxed-width">
+                
+                    <nav class="navbar" id="nav">
+                        <div class="container">
+                            <div class="header-navibox-1">
+                                
+                                <button class="menu-mobile-button visible-xs-block js-toggle-mobile-slidebar toggle-menu-button"><i class="toggle-menu-button-icon"><span></span><span></span><span></span><span></span><span></span><span></span></i>
+                                </button>
+                                
+                                <a class="navbar-brand scroll" href="/">
+                                    <img class="normal-logo img-responsive" src="/assets/frappe/assets/media/general/logo.png" alt="logo" />
+                                    <img class="scroll-logo hidden-xs img-responsive" src="/assets/frappe/assets/media/general/logo-dark.png" alt="logo" />
+                                </a>
+                            </div>
+                            <div class="header-navibox-3">
+                                <ul class="nav navbar-nav hidden-xs clearfix vcenter">
+
+                               
+                                    <li>
+                                        <a class="btn_header_search" href="#" id="search">
+                                            <i class="icon fa fa-search"></i>
+                                        </a>
+                                    </li>
+                                    <li style="display: inline-flex;">
+                                        <span class="location-span">{{current_location}}</span>
+                                        <a id="citysearch" class="location-a">
+                                            <i class="icon fa fa-map-marker"></i>
+                                        </a>
+                                        
+                                    </li>
+                               
+
+                                </ul>
+                            </div>
+
+                            <div class="header-navibox-2">
+                                <ul class="yamm main-menu nav navbar-nav">
+                                    {% for u in item_categories%}
+                                    <li><a href="/{{u.route}}">{{u.category_name}}</a>
+                                    </li>
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                        </div>
+                    </nav>
+
+                </div>
+            </header>
+
+
+
+
+
+<style type="text/css">
+.header-search1 {
+  position: fixed;
+  top: 0;
+  left: 0;
+  display: block;
+  visibility: hidden;
+  width: 100%;
+  height: 100vh;
+  background-color: rgba(34, 34, 34, 0.95);
+  opacity: 0;
+  z-index: 99999;
+  transition: all 0.3s ease 0s;
+}
+
+
+.header-search1.open {
+  visibility: visible;
+  opacity: 1;
+}
+
+.location-span{
+    padding: 3px 0px !important;
+
+}
+.location-a{
+    padding: 0px 8px !important;
+}
+
+.bootstrap-select > .dropdown-toggle{
+    height: 60px !important;
+}
+
+
+
+</style>
